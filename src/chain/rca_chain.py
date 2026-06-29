@@ -73,7 +73,7 @@ def get_llm():
             format="json",
         )
     return ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
+        model="gemini-2.5-flash",
         temperature=0,
         google_api_key=os.environ.get("GOOGLE_API_KEY", ""),
     )
