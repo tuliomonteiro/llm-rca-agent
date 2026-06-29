@@ -136,6 +136,7 @@ llm-rca-agent/
 │   ├── ingest.py        # Build / rebuild the vector store
 │   ├── run_example.py   # Quick CLI test
 │   └── generate_tdd.py  # Regenerate the TDD PDF
+├── frontend/            # React UI (Vite + TypeScript)
 ├── tests/               # Unit tests
 ├── docs/                # TDD_LLM_RCA_Agent.pdf
 ├── .env.example
@@ -182,6 +183,44 @@ USE_OLLAMA=true
 USE_OLLAMA=false
 GOOGLE_API_KEY=AIza...
 ```
+
+## React Frontend
+
+A web UI is included in the `frontend/` directory. It lets you submit incidents and view structured RCA reports in the browser.
+
+### Running the frontend
+
+```bash
+# 1. Start the API server (see Quick Start above)
+uvicorn src.api.main:app --host 0.0.0.0 --port 8000
+
+# 2. In a separate terminal, start the dev server
+cd frontend
+npm install
+npm run dev
+# → http://localhost:5173
+```
+
+The Vite dev server proxies `/analyze` and `/health` to `localhost:8000`, so no CORS config is needed.
+
+### Building for production
+
+```bash
+cd frontend
+npm run build
+# Static files output to frontend/dist/
+```
+
+Serve `frontend/dist/` with any static host (Nginx, S3, Vercel, etc.) and point the API base URL at your deployed backend.
+
+### Frontend features
+- Incident text input with character counter (8,000 char limit)
+- Example incidents for quick testing
+- Structured RCA report view with color-coded sections (root cause, contributing factors, impact, timeline, immediate actions, prevention)
+- Confidence badge (HIGH / MEDIUM / LOW)
+- Fallback report view when no knowledge base matches
+- One-click copy report to clipboard
+- Responsive layout
 
 ## Production Readiness Checklist
 
