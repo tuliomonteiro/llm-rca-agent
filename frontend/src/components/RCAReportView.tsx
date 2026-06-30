@@ -60,11 +60,16 @@ export default function RCAReportView({ report }: Props) {
   return (
     <div className="rca-report">
       <div className="report-toolbar">
-        <div className="report-title-row">
-          <h2 className="report-title">Root Cause Analysis Report</h2>
-          <span className={`confidence-badge conf-${confLevel}`}>
-            {confLevel === 'high' ? '✓' : confLevel === 'low' ? '!' : '~'} {report.confidence}
-          </span>
+        <div className="report-title-block">
+          <div className="report-title-row">
+            <h2 className="report-title">Root Cause Analysis Report</h2>
+            <span className={`confidence-badge conf-${confLevel}`}>
+              {confLevel === 'high' ? '✓' : confLevel === 'low' ? '!' : '~'} {confLevel.toUpperCase()}
+            </span>
+          </div>
+          <p className="confidence-reason">
+            {report.confidence.replace(/^(HIGH|MEDIUM|LOW)[^:]*:\s*/i, '')}
+          </p>
         </div>
         <button className="copy-btn" onClick={handleCopy} title="Copy report to clipboard">
           <span>📋</span> Copy report

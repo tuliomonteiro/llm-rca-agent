@@ -48,6 +48,10 @@ def build_rca_chain(retriever, llm):
         sanitized = _sanitize_incident(incident_text)
         docs = retriever.invoke(sanitized)
 
+        print(f"\n[DEBUG] Retrieved {len(docs)} docs:")
+        for i, doc in enumerate(docs):
+            print(f"  [{i+1}] source={doc.metadata.get('source', 'unknown')}")
+
         if not docs:
             chain = fallback_prompt | fallback_llm
             return chain.invoke({"incident": sanitized})

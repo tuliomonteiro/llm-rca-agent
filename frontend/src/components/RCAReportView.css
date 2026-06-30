@@ -18,6 +18,12 @@
   box-shadow: var(--shadow);
 }
 
+.report-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .report-title-row {
   display: flex;
   align-items: center;
@@ -33,10 +39,18 @@
 
 .confidence-badge {
   font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
+  font-weight: 700;
+  padding: 3px 10px;
   border-radius: 20px;
   white-space: nowrap;
+}
+
+.confidence-reason {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray-500);
+  line-height: 1.5;
+  margin: 0;
 }
 
 .conf-high {
